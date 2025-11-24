@@ -1,0 +1,724 @@
+
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ella Guest House | Pretoria Accommodation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            gold: '#C5A059',
+                            dark: '#1A1A1A',
+                            light: '#F9F9F9',
+                            green: '#0e7490',
+                            purple: '#7e22ce'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Lato"', 'sans-serif'],
+                    },
+                    animation: {
+                        'slide-in-left': 'slideInLeft 1s ease-out forwards',
+                        'slide-in-right': 'slideInRight 1s ease-out forwards',
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                    },
+                    keyframes: {
+                        slideInLeft: {
+                            '0%': { opacity: '0', transform: 'translateX(-50px)' },
+                            '100%': { opacity: '1', transform: 'translateX(0)' },
+                        },
+                        slideInRight: {
+                            '0%': { opacity: '0', transform: 'translateX(50px)' },
+                            '100%': { opacity: '1', transform: 'translateX(0)' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Tilt Effect */
+        .tilt-card {
+            transform-style: preserve-3d;
+            transform: perspective(1000px);
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        /* Scroll Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Carousel Animation */
+        .carousel-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transform: scale(1.05);
+            transition: opacity 1.5s ease-in-out, transform 6s ease;
+        }
+        .carousel-img.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Review Slide Animation */
+        .review-slide {
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .review-hidden-left {
+            opacity: 0;
+            transform: translateX(-20px);
+            pointer-events: none;
+        }
+        .review-hidden-right {
+            opacity: 0;
+            transform: translateX(20px);
+            pointer-events: none;
+        }
+        .review-visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-700 bg-white antialiased overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav class="bg-white/95 backdrop-blur-sm shadow-sm fixed w-full z-50 transition-all duration-300 border-b border-gray-100" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center gap-3 animate-fade-in-up">
+                    <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center text-white shadow-lg overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" class="w-full h-full object-cover opacity-80">
+                    </div>
+                    <div>
+                        <a href="#" class="font-sans text-xl font-bold text-gray-900 leading-tight block">
+                            Ella Guest House
+                        </a>
+                        <span class="text-xs text-gray-500 uppercase tracking-wider">Your comfort our priority</span>
+                    </div>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 animate-fade-in-up" style="animation-delay: 0.1s;">
+                    <a href="#home" class="text-gray-900 hover:text-brand-gold transition duration-300 px-3 py-2 font-medium hover:-translate-y-0.5">Home</a>
+                    <a href="#rooms" class="text-gray-900 hover:text-brand-gold transition duration-300 px-3 py-2 font-medium hover:-translate-y-0.5">Rooms</a>
+                    <a href="#amenities" class="text-gray-900 hover:text-brand-gold transition duration-300 px-3 py-2 font-medium hover:-translate-y-0.5">Amenities</a>
+                    <a href="#location" class="text-gray-900 hover:text-brand-gold transition duration-300 px-3 py-2 font-medium hover:-translate-y-0.5">Location</a>
+                    <a href="#contact" class="text-gray-900 hover:text-brand-gold transition duration-300 px-3 py-2 font-medium hover:-translate-y-0.5">Contact</a>
+                </div>
+
+                <!-- Call to Action Button -->
+                <div class="hidden md:flex items-center gap-4 animate-fade-in-up" style="animation-delay: 0.2s;">
+                    <a href="https://wa.me/27123456789" class="bg-brand-green hover:bg-teal-800 text-white px-6 py-2 rounded-md font-bold transition duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5 flex items-center gap-2">
+                        <i class="fab fa-whatsapp"></i> Book Now
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center gap-4">
+                    <button id="mobile-menu-btn" class="text-gray-900 hover:text-brand-gold focus:outline-none transition duration-300 w-10 h-10 flex items-center justify-center">
+                        <i id="menu-icon-bars" class="fas fa-bars text-2xl"></i>
+                        <i id="menu-icon-close" class="fas fa-times text-2xl hidden"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full shadow-lg transition-all duration-300 origin-top z-40">
+            <div class="px-4 pt-4 pb-6 space-y-2">
+                <a href="#home" class="block px-4 py-3 text-gray-900 font-medium hover:bg-gray-50 rounded-lg transition">Home</a>
+                <a href="#rooms" class="block px-4 py-3 text-gray-900 font-medium hover:bg-gray-50 rounded-lg transition">Rooms</a>
+                <a href="#amenities" class="block px-4 py-3 text-gray-900 font-medium hover:bg-gray-50 rounded-lg transition">Amenities</a>
+                <a href="#location" class="block px-4 py-3 text-gray-900 font-medium hover:bg-gray-50 rounded-lg transition">Location</a>
+                <a href="#contact" class="block px-4 py-3 text-gray-900 font-medium hover:bg-gray-50 rounded-lg transition">Contact</a>
+                <a href="https://wa.me/27123456789" class="block w-full text-center mt-6 bg-brand-green text-white px-5 py-4 rounded-lg font-bold transition active:scale-95 shadow-md">
+                    <i class="fab fa-whatsapp mr-2"></i> Book on WhatsApp
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="pt-24 pb-12 md:pt-32 md:pb-20 px-4 bg-white min-h-screen flex items-center overflow-hidden">
+        <div class="max-w-7xl mx-auto w-full grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+            
+            <!-- LEFT COLUMN: Image Slideshow -->
+            <div class="relative w-full h-64 md:h-[500px] rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl order-1 opacity-0 animate-slide-in-left">
+                <div id="hero-slideshow" class="w-full h-full relative bg-gray-100">
+                    <!-- Images will be cycled by JS -->
+                    <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80" class="carousel-img active" alt="Ella Guest House Room">
+                    <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80" class="carousel-img" alt="Ella Guest House Interior">
+                    <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80" class="carousel-img" alt="Ella Guest House Garden">
+                    <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80" class="carousel-img" alt="Ella Guest House Detail">
+                </div>
+                <!-- Overlay Gradient -->
+                <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent pointer-events-none"></div>
+            </div>
+
+            <!-- RIGHT COLUMN: Text Content -->
+            <div class="order-2 md:pl-10 opacity-0 animate-slide-in-right" style="animation-delay: 0.3s;">
+                <h1 class="font-sans text-3xl md:text-6xl font-bold text-gray-900 mb-4 leading-tight">
+                    Welcome to <br/><span class="text-brand-gold">Ella Guest House</span>
+                </h1>
+                
+                <div class="flex items-center text-gray-500 mb-6 font-medium text-sm md:text-base">
+                    <i class="fas fa-map-marker-alt text-brand-green mr-2 animate-bounce"></i>
+                    <span>295 Van Heerden Street, Capital Park, Pretoria</span>
+                </div>
+
+                <p class="text-base md:text-lg text-gray-600 mb-8 leading-relaxed max-w-lg">
+                    Cozy rooms, warm breakfasts, and friendly Pretoria hospitality. Moments from local sights — unwind in quiet comfort.
+                </p>
+                
+                <div class="flex flex-wrap gap-4 mb-10">
+                    <a href="https://wa.me/27123456789" class="bg-brand-green hover:bg-teal-800 text-white px-6 md:px-8 py-3 rounded-md font-bold transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-1 flex items-center gap-2">
+                        <i class="fab fa-whatsapp"></i> Reserve a Room
+                    </a>
+                    <a href="#rooms" class="bg-purple-50 text-brand-purple border border-brand-purple/30 hover:bg-purple-100 px-6 md:px-8 py-3 rounded-md font-bold transition-all duration-300 hover:-translate-y-1">
+                        See Rooms
+                    </a>
+                </div>
+
+                <div class="flex gap-4 md:gap-6 text-xs md:text-sm text-gray-500 font-medium flex-wrap">
+                    <span class="flex items-center gap-2 transition hover:text-brand-gold cursor-default"><i class="fas fa-ban-smoking text-brand-gold"></i> Non-Smoking</span>
+                    <span class="flex items-center gap-2 transition hover:text-brand-gold cursor-default"><i class="fas fa-shield-alt text-brand-gold"></i> Secure parking</span>
+                    <span class="flex items-center gap-2 transition hover:text-brand-gold cursor-default"><i class="fas fa-wifi text-brand-gold"></i> Free Wi-Fi</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Amenities Section (Dark Theme) -->
+    <section id="amenities" class="py-20 bg-brand-dark relative overflow-hidden">
+        <!-- Decorative bg element -->
+        <div class="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-32 -mt-32 transition-transform duration-700 hover:scale-110"></div>
+
+        <div class="max-w-7xl mx-auto px-4 relative z-10">
+            <div class="text-center mb-16 reveal">
+                <h2 class="font-serif text-4xl font-bold text-white mb-4">Our Amenities</h2>
+                <p class="text-gray-300 max-w-2xl mx-auto">Designed for your comfort and convenience.</p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <!-- Feature 1 -->
+                <div class="reveal delay-100 text-center p-6 border border-gray-700 rounded-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 bg-gray-800 group">
+                    <div class="w-16 h-16 bg-gray-700 text-brand-gold rounded-full flex items-center justify-center mx-auto mb-4 text-2xl group-hover:scale-110 transition-transform">
+                        <i class="fas fa-wifi"></i>
+                    </div>
+                    <h3 class="font-bold text-white mb-2">Free Wi-Fi</h3>
+                    <p class="text-sm text-gray-400">Stay connected with high-speed internet.</p>
+                </div>
+                 <!-- Feature 2 -->
+                 <div class="reveal delay-200 text-center p-6 border border-gray-700 rounded-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 bg-gray-800 group">
+                    <div class="w-16 h-16 bg-gray-700 text-brand-gold rounded-full flex items-center justify-center mx-auto mb-4 text-2xl group-hover:scale-110 transition-transform">
+                        <i class="fas fa-parking"></i>
+                    </div>
+                    <h3 class="font-bold text-white mb-2">Free Parking</h3>
+                    <p class="text-sm text-gray-400">Secure, on-site parking for your vehicle.</p>
+                </div>
+                 <!-- Feature 3 -->
+                 <div class="reveal delay-300 text-center p-6 border border-gray-700 rounded-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 bg-gray-800 group">
+                    <div class="w-16 h-16 bg-gray-700 text-brand-gold rounded-full flex items-center justify-center mx-auto mb-4 text-2xl group-hover:scale-110 transition-transform">
+                        <i class="fas fa-shower"></i>
+                    </div>
+                    <h3 class="font-bold text-white mb-2">Private Bathroom</h3>
+                    <p class="text-sm text-gray-400">Every room includes a private shower.</p>
+                </div>
+                 <!-- Feature 4 -->
+                 <div class="reveal delay-400 text-center p-6 border border-gray-700 rounded-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 bg-gray-800 group">
+                    <div class="w-16 h-16 bg-gray-700 text-brand-gold rounded-full flex items-center justify-center mx-auto mb-4 text-2xl group-hover:scale-110 transition-transform">
+                        <i class="fas fa-ban-smoking"></i>
+                    </div>
+                    <h3 class="font-bold text-white mb-2">Non-Smoking</h3>
+                    <p class="text-sm text-gray-400">Clean, fresh air in all our rooms.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rooms Section with 3D Tilt Cards -->
+    <section id="rooms" class="py-20 px-4 bg-brand-light transition-colors duration-300">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 reveal">
+                <span class="text-brand-gold font-bold tracking-widest uppercase">Accommodation</span>
+                <h2 class="font-serif text-4xl font-bold text-brand-dark mt-2">Our Rooms</h2>
+                <p class="mt-4 text-gray-500">Check-in: 14:00 - 18:00 | Check-out: 10:00 - 11:00</p>
+            </div>
+
+            <!-- Changed from Grid to Flex for perfect centering -->
+            <div class="flex flex-wrap justify-center gap-8">
+                <!-- Room 1 -->
+                <div class="w-full md:w-96 bg-white rounded-lg shadow-md tilt-card cursor-pointer group reveal delay-100" data-tilt>
+                    <div class="overflow-hidden h-64 rounded-t-lg">
+                        <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Double Room" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                    </div>
+                    <div class="p-6 tilt-content bg-white rounded-b-lg border border-t-0 border-gray-100">
+                        <div class="flex justify-between items-baseline mb-2">
+                            <h3 class="font-serif text-xl font-bold text-gray-900">Double Room</h3>
+                            <span class="text-brand-gold font-bold text-lg">From R550<span class="text-xs text-gray-400 font-normal">/night</span></span>
+                        </div>
+                        <p class="text-gray-500 text-sm mb-4">Comfortable queen bed with private en-suite bathroom.</p>
+                        <div class="flex space-x-3 text-xs text-gray-400 mb-6">
+                            <span><i class="fas fa-bed"></i> 1 Queen</span>
+                            <span><i class="fas fa-user"></i> 2 Guests</span>
+                            <span><i class="fas fa-wifi"></i> Free Wifi</span>
+                        </div>
+                        <a href="https://wa.me/27123456789?text=Hi, I am interested in booking the Double Room." class="block w-full text-center border border-brand-dark text-brand-dark hover:bg-brand-dark hover:text-white py-2 rounded transition duration-300 shadow-sm hover:shadow-lg">Check Availability</a>
+                    </div>
+                </div>
+
+                <!-- Room 2 (Featured) -->
+                <div class="w-full md:w-96 bg-white rounded-lg shadow-xl tilt-card cursor-pointer group reveal delay-200 relative md:-translate-y-4 border-t-4 border-brand-gold" data-tilt>
+                    <div class="absolute top-4 right-4 bg-brand-gold text-white text-xs font-bold px-3 py-1 rounded shadow-md z-10">BEST VALUE</div>
+                    <div class="overflow-hidden h-64 rounded-t-lg">
+                        <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Executive Room" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                    </div>
+                    <div class="p-6 tilt-content bg-white rounded-b-lg border-x border-b border-gray-100">
+                        <div class="flex justify-between items-baseline mb-2">
+                            <h3 class="font-serif text-xl font-bold text-gray-900">Deluxe Double</h3>
+                            <span class="text-brand-gold font-bold text-lg">From R650<span class="text-xs text-gray-400 font-normal">/night</span></span>
+                        </div>
+                        <p class="text-gray-500 text-sm mb-4">Spacious room with added comfort and amenities.</p>
+                        <div class="flex space-x-3 text-xs text-gray-400 mb-6">
+                            <span><i class="fas fa-bed"></i> 1 Large Bed</span>
+                            <span><i class="fas fa-user"></i> 2 Guests</span>
+                            <span><i class="fas fa-tv"></i> DSTV</span>
+                        </div>
+                        <a href="https://wa.me/27123456789?text=Hi, I am interested in booking the Deluxe Double." class="block w-full text-center bg-brand-gold text-white hover:bg-yellow-600 py-2 rounded transition duration-300 shadow-md hover:shadow-xl">Check Availability</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-10 text-gray-500 text-sm">
+                <p><i class="fas fa-info-circle mr-1"></i> Note: We strictly do not allow parties or loud music to ensure peace for all guests.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Guest Reviews Section -->
+    <section class="py-20 bg-brand-dark text-white text-center px-4 relative overflow-hidden" id="reviews">
+        <!-- Abstract BG Shapes -->
+        <div class="absolute top-0 left-0 w-full h-full overflow-hidden opacity-10 pointer-events-none">
+             <div class="absolute -top-10 -left-10 w-40 h-40 bg-white rounded-full animate-pulse" style="animation-duration: 4s;"></div>
+             <div class="absolute bottom-10 right-10 w-60 h-60 bg-brand-gold rounded-full animate-pulse" style="animation-duration: 5s;"></div>
+        </div>
+        
+        <div class="max-w-4xl mx-auto relative z-10 reveal">
+            <!-- Heading -->
+            <span class="text-brand-gold font-bold tracking-widest uppercase mb-2 block">Testimonials</span>
+            <h2 class="font-serif text-4xl font-bold text-white mb-12">What Our Guests Say</h2>
+
+            <!-- Review Carousel Container -->
+            <div class="relative px-8 md:px-12">
+                <!-- Previous Button -->
+                <button onclick="prevReview()" class="absolute left-0 top-1/2 -translate-y-1/2 text-gray-500 hover:text-brand-gold transition duration-300 p-2 focus:outline-none hidden md:block transform hover:scale-110">
+                    <i class="fas fa-chevron-left text-2xl"></i>
+                </button>
+
+                <!-- Review Content -->
+                <div id="review-container" class="min-h-[200px] flex flex-col justify-center items-center review-slide review-visible" ontouchstart="handleTouchStart(event)" ontouchmove="handleTouchMove(event)" ontouchend="handleTouchEnd()">
+                    <i class="fas fa-quote-left text-4xl text-brand-gold mb-6 opacity-50"></i>
+                    <h3 id="review-text" class="font-serif text-xl md:text-3xl leading-relaxed italic mb-6">
+                        "Loved my stay! The place is clean, cozy, and very welcoming. The staff were so friendly and helpful, and everything felt comfortable from the start."
+                    </h3>
+                    <div class="flex items-center justify-center space-x-2 mb-4">
+                        <i class="fas fa-star text-brand-gold"></i>
+                        <i class="fas fa-star text-brand-gold"></i>
+                        <i class="fas fa-star text-brand-gold"></i>
+                        <i class="fas fa-star text-brand-gold"></i>
+                        <i class="fas fa-star text-brand-gold"></i>
+                    </div>
+                    <p id="review-author" class="font-bold text-gray-400">- Puseletso, Booking.com Review</p>
+                </div>
+
+                <!-- Next Button -->
+                <button onclick="nextReview()" class="absolute right-0 top-1/2 -translate-y-1/2 text-gray-500 hover:text-brand-gold transition duration-300 p-2 focus:outline-none hidden md:block transform hover:scale-110">
+                    <i class="fas fa-chevron-right text-2xl"></i>
+                </button>
+            </div>
+            
+            <!-- Dots Indicator -->
+            <div class="flex justify-center space-x-2 mt-8" id="review-dots">
+                <!-- Dots will be generated by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Location Section (Isolated) -->
+    <section id="location" class="bg-gray-100 py-20">
+        <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
+            
+            <!-- Location Details -->
+            <div class="order-2 md:order-1">
+                <span class="text-brand-gold font-bold tracking-widest uppercase mb-2 block">Find Us</span>
+                <h2 class="font-serif text-4xl font-bold text-brand-dark mb-6">Our Location</h2>
+                
+                <div class="space-y-6">
+                    <div class="flex items-start hover:translate-x-2 transition duration-300 group">
+                        <div class="w-10 flex-shrink-0 text-brand-gold text-xl mt-1 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-900">Address</h4>
+                            <p class="text-gray-600">295 Van Heerden Street<br>Capital Park / City Central<br>Pretoria, 0084</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start hover:translate-x-2 transition duration-300 group">
+                        <div class="w-10 flex-shrink-0 text-brand-gold text-xl mt-1 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-900">Check-in / Out</h4>
+                            <p class="text-gray-600">Check-in: 14:00 - 18:00</p>
+                            <p class="text-gray-600">Check-out: 10:00 - 11:00</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-brand-gold text-sm text-gray-600">
+                        <i class="fas fa-info-circle mr-2 text-brand-gold"></i>
+                        Located near <strong>Union Buildings</strong> (3.9km) and <strong>University of Pretoria</strong> (7.6km).
+                    </div>
+                </div>
+            </div>
+
+            <!-- Map -->
+            <div class="order-1 md:order-2 h-96 rounded-2xl overflow-hidden shadow-xl border border-gray-200">
+                <iframe 
+                    src="https://maps.google.com/maps?q=295%20Van%20Heerden%20Street%2C%20Capital%20Park%2C%20Pretoria&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+                    width="100%" 
+                    height="100%" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section (Isolated) -->
+    <section id="contact" class="bg-white py-20">
+        <div class="max-w-3xl mx-auto px-4 text-center">
+            <span class="text-brand-gold font-bold tracking-widest uppercase mb-2 block">Get in Touch</span>
+            <h2 class="font-serif text-4xl font-bold text-brand-dark mb-8">Contact Us</h2>
+            
+            <!-- Inquiry Form -->
+            <form class="mb-10 space-y-4 text-left bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-1">Name</label>
+                        <input type="text" placeholder="Your Name" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-gold transition duration-300">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-1">Email</label>
+                        <input type="email" placeholder="Your Email" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-gold transition duration-300">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-1">Message</label>
+                    <textarea placeholder="How can we help you?" rows="4" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-gold transition duration-300"></textarea>
+                </div>
+                <button type="button" class="w-full bg-brand-dark text-white font-bold py-4 rounded-lg hover:bg-gray-800 transition duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5" onclick="alert('Thank you! We will get back to you soon.')">
+                    Send Message
+                </button>
+            </form>
+
+            <div class="flex flex-col md:flex-row justify-center gap-6 items-center">
+                <div class="flex items-center gap-3 text-gray-700">
+                    <div class="w-10 h-10 rounded-full bg-brand-light flex items-center justify-center text-brand-gold text-xl">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-500">Call Us</p>
+                        <a href="tel:+27794668807" class="font-bold hover:text-brand-gold transition">+27 79 466 8807</a>
+                    </div>
+                </div>
+                <div class="hidden md:block h-10 w-px bg-gray-200"></div>
+                <div class="flex items-center gap-3 text-gray-700">
+                    <div class="w-10 h-10 rounded-full bg-brand-light flex items-center justify-center text-brand-gold text-xl">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-500">Email Us</p>
+                        <a href="mailto:info@ellaguesthouse.co.za" class="font-bold hover:text-brand-gold transition">info@ellaguesthouse.co.za</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-10">
+                <a href="https://wa.me/27794668807" class="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-full font-bold transition duration-300 shadow-lg hover:shadow-green-500/30 transform hover:-translate-y-1">
+                    <i class="fab fa-whatsapp text-2xl"></i> Chat on WhatsApp
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+            <!-- Brand & Bio -->
+            <div>
+                <a href="#" class="font-serif text-2xl font-bold block mb-4">Ella <span class="text-brand-gold">Guest House</span></a>
+                <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                    Experience the warmth of Pretoria hospitality. Your comfortable, secure home away from home in the heart of the city, perfect for business and leisure travelers.
+                </p>
+                <div class="flex space-x-4">
+                    <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-brand-gold hover:text-white transition duration-300"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-brand-gold hover:text-white transition duration-300"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-brand-gold hover:text-white transition duration-300"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="md:pl-10">
+                <h3 class="text-lg font-bold mb-6 border-b-2 border-brand-gold inline-block pb-1">Quick Links</h3>
+                <ul class="space-y-3 text-sm text-gray-400">
+                    <li><a href="#home" class="hover:text-brand-gold transition flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-gray-600"></i>Home</a></li>
+                    <li><a href="#rooms" class="hover:text-brand-gold transition flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-gray-600"></i>Our Rooms</a></li>
+                    <li><a href="#amenities" class="hover:text-brand-gold transition flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-gray-600"></i>Amenities</a></li>
+                    <li><a href="#location" class="hover:text-brand-gold transition flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-gray-600"></i>Find Us</a></li>
+                    <li><a href="#contact" class="hover:text-brand-gold transition flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-gray-600"></i>Contact</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact Info -->
+            <div>
+                <h3 class="text-lg font-bold mb-6 border-b-2 border-brand-gold inline-block pb-1">Contact Info</h3>
+                <ul class="space-y-4 text-sm text-gray-400">
+                    <li class="flex items-start">
+                        <i class="fas fa-map-marker-alt text-brand-gold mt-1 mr-3 w-5 text-center"></i>
+                        <span>295 Van Heerden Street,<br>Capital Park, Pretoria, 0084</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fas fa-phone-alt text-brand-gold mr-3 w-5 text-center"></i>
+                        <a href="tel:+27794668807" class="hover:text-white transition">+27 79 466 8807</a>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fab fa-whatsapp text-brand-gold mr-3 w-5 text-center"></i>
+                        <a href="https://wa.me/27123456789" class="hover:text-white transition">WhatsApp Us</a>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fas fa-envelope text-brand-gold mr-3 w-5 text-center"></i>
+                        <a href="mailto:info@ellaguesthouse.co.za" class="hover:text-white transition">info@ellaguesthouse.co.za</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Copyright -->
+        <div class="border-t border-gray-800 pt-8 text-center px-4">
+            <p class="text-gray-500 text-xs">
+                &copy; <span id="year"></span> Ella Guest House. All rights reserved. 
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // --- MOBILE MENU ---
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        const barsIcon = document.getElementById('menu-icon-bars');
+        const closeIcon = document.getElementById('menu-icon-close');
+
+        btn.addEventListener('click', () => {
+            const isHidden = menu.classList.contains('hidden');
+            if (isHidden) {
+                menu.classList.remove('hidden');
+                barsIcon.classList.add('hidden');
+                closeIcon.classList.remove('hidden');
+            } else {
+                menu.classList.add('hidden');
+                barsIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+            }
+        });
+        
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // --- SCROLL REVEAL ANIMATIONS ---
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealOnScroll = () => {
+            const windowHeight = window.innerHeight;
+            const elementVisible = 150;
+            revealElements.forEach((reveal) => {
+                const elementTop = reveal.getBoundingClientRect().top;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveal.classList.add('active');
+                }
+            });
+        };
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll(); // Trigger once on load
+
+        // --- HOME CAROUSEL ---
+        const carouselImages = document.querySelectorAll('.carousel-img');
+        let currentImageIndex = 0;
+
+        function cycleImages() {
+            // Remove active class from current
+            carouselImages[currentImageIndex].classList.remove('active');
+            // Increment index
+            currentImageIndex = (currentImageIndex + 1) % carouselImages.length;
+            // Add active class to next
+            carouselImages[currentImageIndex].classList.add('active');
+        }
+
+        // Change image every 3 seconds (3000ms)
+        setInterval(cycleImages, 3000);
+
+
+        // --- REVIEWS CAROUSEL ---
+        const reviews = [
+            {
+                text: "Loved my stay! The place is clean, cozy, and very welcoming. The staff were so friendly and helpful, and everything felt comfortable from the start.",
+                author: "Puseletso, Booking.com Review"
+            },
+            {
+                text: "The most comfortable bed I've slept in for years. Mama makes you feel like family, and the breakfast is absolutely delicious. Highly recommended.",
+                author: "Thabo M., Google Review"
+            },
+            {
+                text: "Perfect location for my business trip to the Union Buildings. Secure parking was a huge plus. Will definitely stay here again.",
+                author: "Sarah J., Direct Booking"
+            },
+             {
+                text: "Quiet, peaceful and safe. The backup power really saved me during load shedding. Excellent service.",
+                author: "Michael K., Booking.com Review"
+            }
+        ];
+
+        let currentReviewIndex = 0;
+        const reviewText = document.getElementById('review-text');
+        const reviewAuthor = document.getElementById('review-author');
+        const reviewContainer = document.getElementById('review-container');
+        const dotsContainer = document.getElementById('review-dots');
+
+        function initReviews() {
+            // Create dots
+            reviews.forEach((_, index) => {
+                const dot = document.createElement('button');
+                dot.className = `w-3 h-3 rounded-full transition-all duration-300 transform hover:scale-125 ${index === 0 ? 'bg-brand-gold scale-110' : 'bg-gray-600 hover:bg-gray-500'}`;
+                dot.onclick = () => showReview(index, index > currentReviewIndex ? 'next' : 'prev');
+                dotsContainer.appendChild(dot);
+            });
+        }
+
+        function showReview(index, direction) {
+            // 1. Slide Out
+            reviewContainer.classList.remove('review-visible');
+            reviewContainer.classList.add(direction === 'next' ? 'review-hidden-left' : 'review-hidden-right');
+            
+            setTimeout(() => {
+                // 2. Change Content
+                currentReviewIndex = index;
+                reviewText.textContent = `"${reviews[index].text}"`;
+                reviewAuthor.textContent = `- ${reviews[index].author}`;
+                
+                // Update dots
+                Array.from(dotsContainer.children).forEach((dot, i) => {
+                    dot.className = `w-3 h-3 rounded-full transition-all duration-300 transform hover:scale-125 ${i === index ? 'bg-brand-gold scale-110' : 'bg-gray-600 hover:bg-gray-500'}`;
+                });
+
+                // 3. Prepare Slide In (Move to opposite side instantly)
+                reviewContainer.style.transition = 'none'; // Disable transition for instant move
+                reviewContainer.classList.remove('review-hidden-left', 'review-hidden-right');
+                reviewContainer.classList.add(direction === 'next' ? 'review-hidden-right' : 'review-hidden-left');
+                
+                // Force Reflow
+                void reviewContainer.offsetWidth;
+
+                // 4. Slide In
+                reviewContainer.style.transition = 'opacity 0.5s ease, transform 0.5s ease'; // Re-enable transition
+                reviewContainer.classList.remove('review-hidden-left', 'review-hidden-right');
+                reviewContainer.classList.add('review-visible');
+
+            }, 300); // Wait for slide out transition
+        }
+
+        function nextReview() {
+            let newIndex = (currentReviewIndex + 1) % reviews.length;
+            showReview(newIndex, 'next');
+        }
+
+        function prevReview() {
+            let newIndex = (currentReviewIndex - 1 + reviews.length) % reviews.length;
+            showReview(newIndex, 'prev');
+        }
+
+        // Swipe Support
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        function handleTouchStart(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        }
+
+        function handleTouchMove(e) {
+            touchEndX = e.changedTouches[0].screenX;
+        }
+
+        function handleTouchEnd() {
+            if (touchStartX - touchEndX > 50) {
+                nextReview(); // Swipe Left -> Next
+            }
+            if (touchEndX - touchStartX > 50) {
+                prevReview(); // Swipe Right -> Prev
+            }
+        }
+
+        initReviews();
+
+
+        // --- 3D TILT EFFECT FOR CARDS (Vanilla JS) ---
+        const cards = document.querySelectorAll('.tilt-card');
+        cards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const cardRect = card.getBoundingClientRect();
+                const cardWidth = cardRect.width;
+                const cardHeight = cardRect.height;
+                const centerX = cardRect.left + cardWidth / 2;
+                const centerY = cardRect.top + cardHeight / 2;
+                const mouseX = e.clientX - centerX;
+                const mouseY = e.clientY - centerY;
+                const rotateX = (mouseY / cardHeight / 2) * -20; 
+                const rotateY = (mouseX / cardWidth / 2) * 20;
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg)`;
+                card.style.transition = 'transform 0.5s ease';
+            });
+            card.addEventListener('mouseenter', () => {
+                card.style.transition = 'none';
+            });
+        });
+    </script>
+</body>
+</html>
