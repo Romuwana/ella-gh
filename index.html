@@ -540,12 +540,15 @@
         </div>
     </footer>
 
-    <script>
-        // --- MOBILE MENU ---
+   <script>
+        // --- MOBILE MENU (UPDATED) ---
         const btn = document.getElementById('mobile-menu-btn');
         const menu = document.getElementById('mobile-menu');
         const barsIcon = document.getElementById('menu-icon-bars');
         const closeIcon = document.getElementById('menu-icon-close');
+        
+        // Select all links inside the mobile menu
+        const mobileLinks = document.querySelectorAll('#mobile-menu a');
 
         btn.addEventListener('click', () => {
             const isHidden = menu.classList.contains('hidden');
@@ -558,6 +561,15 @@
                 barsIcon.classList.remove('hidden');
                 closeIcon.classList.add('hidden');
             }
+        });
+
+        // ADDED: Close menu when a link inside the menu is clicked
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+                barsIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+            });
         });
         
         document.getElementById('year').textContent = new Date().getFullYear();
